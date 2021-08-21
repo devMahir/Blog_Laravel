@@ -36,3 +36,7 @@ Route::get('admin/tag', function () {
 Route::get('admin/category', function () {
     return view('admin.category.category');
 })->name('admin.category');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
