@@ -19,11 +19,11 @@ class CreatePostsTable extends Migration
             $table->string('sub_title', 100);
             $table->string('slug', 100);
             $table->text('body');
-            $table->boolean('status');
             $table->integer('posted_by');
             $table->string('image');
             $table->integer('like');
             $table->integer('dislike');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

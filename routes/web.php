@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\BlogController;
+use App\Http\Controllers\User\MainhomeController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,29 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user.blog');
-})->name('blog');
+Route::get('/', [MainhomeController::class, 'index'])->name('mainBlog');
+Route::get('/post', [BlogController::class, 'index'])->name('post');
 
-Route::get('post', function () {
-    return view('user.post');
-})->name('post');
+
+
 
 Route::get('admin/home', function () {
     return view('admin.home');
 })->name('admin.home');
 
-Route::get('admin/post', function () {
-    return view('admin.post.post');
-})->name('admin.post');
 
-Route::get('admin/tag', function () {
-    return view('admin.tag.tag');
-})->name('admin.tag');
-
-Route::get('admin/category', function () {
-    return view('admin.category.category');
-})->name('admin.category');
+Route::group(['prefix' => 'admin'/* , 'middleware' => 'auth' */ ], function() {
+    Route::resource('post', PostController::class);
+    Route::resource('tag', TagController::class);
+    Route::resource('category', CategoryController::class);
+});
 
 Auth::routes();
 
