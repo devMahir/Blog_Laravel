@@ -33,26 +33,27 @@
               <div class="card-header">
                 <h3 class="card-title">Title</h3>
               </div>
-              <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}">
+              <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('post.update',$post->id) }}">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                   <div class="row">
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label for="title">Post Title</label>
-                              <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
+                              <input value="{{ $post-> title}}" type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
                             </div>
         
                             <div class="form-group">
                                 <label for="sub_title">Post Sub Title</label>
-                                <input type="text" name="sub_title" class="form-control" id="sub_title" placeholder="Enter Sub Title">
+                                <input value="{{ $post-> sub_title}}" type="text" name="sub_title" class="form-control" id="sub_title" placeholder="Enter Sub Title">
                             </div>
                       </div>
   
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label for="slug">Post Slug</label>
-                              <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
+                              <input value="{{ $post-> slug}}" type="text" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
                           </div>
 
                           <div class="form-group">
@@ -92,8 +93,9 @@
                           <!-- /.card-header -->
                           <div class="card-body pad">
                             <div class="mb-3">
-                              <textarea id="summernote" name="text" placeholder="Place some text here"
-                                        style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                <textarea id="summernote" name="text" 
+                                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{ $post-> body}}"
+                                </textarea>
                             </div>
                           </div>
                         </div>

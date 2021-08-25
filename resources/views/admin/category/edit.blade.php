@@ -30,21 +30,22 @@
                 <div class="card-header">
                   <h3 class="card-title">Category</h3>
                 </div>
-                <form role="form" method="POST" action="{{ route('category.store') }}">
+                <form role="form" method="POST" action="{{ route('category.update',$category->id) }}">
                   @csrf
+                  @method('PUT')
                   <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="title">Category Title</label>
-                                <input type="text" name="name" class="form-control" id="title" placeholder="Enter Category">
+                                <input type="text" value="{{$category->name}}" name="name" class="form-control" id="title" placeholder="Enter Category">
                               </div>
                         </div>
     
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="slug">Category Slug</label>
-                                <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
+                                <input type="text" value="{{$category->slug}}" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
                             </div>
                         </div>
                     </div>

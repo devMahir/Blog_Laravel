@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\carbon;
+use Illuminate\Support\Str;
+use App\Models\user\Post;
 
 class PostController extends Controller
 {
@@ -14,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('admin.post.index');
+        $posts = Post::all();
+        return view('admin.post.index',compact('posts'));
     }
 
     /**
@@ -36,12 +40,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        /* $validated = $request->validate([
+        $validated = $request->validate([
             'title' => 'required',
             'sub_title' => 'required',
             'slug' => 'required',
-            'body' => 'required',
-            'status' => 'required'
+            'text' => 'required'
         ]);
         $postinfo = $request->status;
         $image = $request->file('image');
@@ -62,20 +65,19 @@ class PostController extends Controller
         $post -> title = $request -> title;
         $post -> sub_title = $request -> sub_title;
         $post -> slug = $request -> slug;
-        $post -> body = $request -> body;
+        $post -> body = $request -> text;
         $post -> image = $image_name;
+
         if ($postinfo==true) {
             $post -> status = true;
         }
         else{
             $post -> status = false;
         }
-        $post -> status = true; */
-        return $request->all();
         
-        //$post -> save();
+        $post -> save();
 
-        //return redirect()->route('video.index')->with('successMsg', 'Video Catelog Successfully Saved');
+        return redirect()->route('post.index')->with('successMsg', 'Post Successfully Posted');
     }
 
     /**
@@ -97,7 +99,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('admin.post.edit',compact('post'));
     }
 
     /**
@@ -109,7 +112,41 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required',
+            'sub_title' => 'required',
+            'slug' => 'required',
+            'text' => 'required'
+        ]);
+        $postinfo = $request->status;
+        $image = $request->file('image');
+        $slug_img = str::of($request->title)->slug('_');
+        $post = Post::find($id);
+
+        if (isset($image)) {
+            $currentDate = Carbon::now()->toDateString();
+            $image_name = $slug_img.'_'.$currentDate.'_'.uniqid().'.'.$image->getClientOriginalExtension();
+            if (!file_exists('uploads/PostImage')) {
+                mkdir('uploads/PostImage',007,true);
+            }
+            unlink('uploads/slider/'.$post->image);
+            $image->move('uploads/PostImage',$image_name);
+        }else {
+            $image_name = $post->image;
+        }
+        $post -> title = $request -> title;
+        $post -> sub_title = $request -> sub_title;
+        $post -> slug = $request -> slug;
+        $post -> body = $request -> text;
+        $post -> image = $image_name;
+        if ($postinfo==true) {
+            $post -> status = true;
+        }
+        else{
+            $post -> status = false;
+        }
+        $post -> save();
+        return redirect()->route('post.index')->with('successMsg', 'Post Successfully Updated');
     }
 
     /**
@@ -120,6 +157,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post -> delete();
+        return redirect()->route('post.index')->with('successMsg', 'Post Successfully Deleted');
     }
 }
