@@ -65,16 +65,21 @@
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
+
+<script src="{{ asset('user/js/scripts.js') }}"></script>
+<!-- AdminLTE App -->
+<script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
 <script>
 $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>
 <script>
-  $(function () {
+  $(document).ready(function () {
     // Summernote
     $('.textarea').summernote()
-  })
+  });
 </script>
 </body>
 </html>
