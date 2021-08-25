@@ -49,8 +49,6 @@
 <script src="{{ asset('admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('admin/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-<!-- Summernote -->
-<script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <!-- overlayScrollbars -->
 <script src="{{ asset('admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
 <!-- AdminLTE App -->
@@ -64,17 +62,15 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
-<script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
+
 
 
 <script src="{{ asset('user/js/scripts.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('admin/dist/js/adminlte.min.js') }}"></script>
-<script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
+@stack('script')
+
 <script>
   $(document).ready(function () {
     // Summernote
