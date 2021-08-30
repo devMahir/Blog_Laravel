@@ -11,14 +11,15 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Admin</a></li>
-              <li class="breadcrumb-item"><a href="{{ route('tag.index') }}">Tags</a></li>
-              <li class="breadcrumb-item active">Add Tags</li>
+              <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+              <li class="breadcrumb-item active"><a href="{{ route('tag.index') }}">Tag</a></li>
+              <li class="breadcrumb-item active">Add Tag</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    @include('admin.layouts.msg')
     
     <!-- Main content -->
     <section class="content">
@@ -29,21 +30,22 @@
                 <div class="card-header">
                   <h3 class="card-title">Tag</h3>
                 </div>
-                <form role="form" method="POST" action="{{ route('tag.store') }}">
+                <form role="form" method="POST" action="{{ route('tag.update',$tag->id) }}">
                   @csrf
+                  @method('PUT')
                   <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="title">Tag Title</label>
-                                <input type="text" name="name" class="form-control" id="title" placeholder="Enter Title">
+                                <input type="text" value="{{$tag->name}}" name="name" class="form-control" id="title" placeholder="Enter Tag">
                               </div>
                         </div>
     
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="slug">Tag Slug</label>
-                                <input type="text" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
+                                <input type="text" value="{{$tag->slug}}" name="slug" class="form-control" id="slug" placeholder="Enter Slug">
                             </div>
                         </div>
                     </div>

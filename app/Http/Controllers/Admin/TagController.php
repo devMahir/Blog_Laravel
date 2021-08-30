@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\user\Tag;
 
 class TagController extends Controller
 {
@@ -14,7 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view('admin.tag.index');
+        $tags = Tag::all();
+        return view('admin.tag.index',compact('tags'));
     }
 
     /**
@@ -35,7 +37,15 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'slug' => 'required'
+        ]);
+        $tag = new Tag();
+        $tag -> name = $request -> name;
+        $tag -> slug = $request -> slug;
+        $tag -> save();
+        return redirect()->route('tag.index')->with('successMsg', 'Tag Successfully Saved');
     }
 
     /**
@@ -57,7 +67,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tag = Tag::find($id);
+        return view('admin.tag.edit',compact('tag'));
     }
 
     /**
@@ -69,7 +80,15 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'slug' => 'required'
+        ]);
+        $tag = Tag::find($id);
+        $tag -> name = $request -> name;
+        $tag -> slug = $request -> slug;
+        $tag -> save();
+        return redirect()->route('tag.index')->with('successMsg', 'Tag Successfully Updated');
     }
 
     /**
@@ -80,6 +99,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tag = Tag::find($id);
+        $tag -> delete();
+        return redirect()->route('tag.index')->with('successMsg', 'Tag Successfully Deleted');
     }
 }
