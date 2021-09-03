@@ -38,6 +38,7 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Slug</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">Tags</th>
                     <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                 </tr>
@@ -55,6 +56,15 @@
                                 <span style="background: #F0AD4E; color: white; padding: 6px; border-radius: 6px;">Panding</span>
                             @endif
                         </td>
+
+                        <td class="text-center">
+                          @forelse ($post->tags as $tag)
+                              {{ $tag -> name }}
+                          @empty
+                              <p>No Tags celected</p>
+                          @endforelse
+                        </td>
+
                         <td class="text-center">
                             <a class="btn btn-info btn-sm" href="{{ route('post.edit', $post->id) }}"><i class="material-icons">mode_edit</i></a> 
                         </td>                 
@@ -74,6 +84,7 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Slug</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center">Tags</th>
                     <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                 </tr>
