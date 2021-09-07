@@ -38,7 +38,8 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Slug</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center">Tags</th>
+                    <th class="text-center">Tag</th>
+                    <th class="text-center">Category</th>
                     <th class="text-center">Edit</th>
                     <th class="text-center">Delete</th>
                 </tr>
@@ -59,7 +60,15 @@
 
                         <td class="text-center">
                           @forelse ($post->tags as $tag)
-                              {{ $tag -> name }}
+                            {{ $tag -> name }}
+                          @empty
+                              <p>No Tags celected</p>
+                          @endforelse
+                        </td>
+
+                        <td class="text-center">
+                          @forelse ($post->categories as $category)
+                              {{ $category -> name }}
                           @empty
                               <p>No Tags celected</p>
                           @endforelse
@@ -80,13 +89,14 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th class="text-center">ID</th>
-                    <th class="text-center">Title</th>
-                    <th class="text-center">Slug</th>
-                    <th class="text-center">Status</th>
-                    <th class="text-center">Tags</th>
-                    <th class="text-center">Edit</th>
-                    <th class="text-center">Delete</th>
+                  <th class="text-center">ID</th>
+                  <th class="text-center">Title</th>
+                  <th class="text-center">Slug</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center">Tag</th>
+                  <th class="text-center">Category</th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Delete</th>
                 </tr>
             </tfoot>
         </table>

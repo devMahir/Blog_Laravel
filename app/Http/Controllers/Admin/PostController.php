@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Carbon\carbon;
 use Illuminate\Support\Str;
 use App\Models\user\Post;
+use App\Models\user\Post_tag;
+use App\Models\user\Tag;
+use App\Models\user\Category;
 
 class PostController extends Controller
 {
@@ -28,8 +31,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        
-        return view('admin.post.create');
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('admin.post.create', compact('tags', 'categories'));
     }
 
     /**
@@ -40,6 +44,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request->all();
+
         $validated = $request->validate([
             'title' => 'required',
             'sub_title' => 'required',
@@ -67,15 +73,15 @@ class PostController extends Controller
         $post -> slug = $request -> slug;
         $post -> body = $request -> text;
         $post -> image = $image_name;
-
         if ($postinfo==true) {
             $post -> status = true;
         }
         else{
             $post -> status = false;
         }
-        
         $post -> save();
+        $post -> tags() -> sync($request -> tags);
+        $post -> categories() -> sync($request -> categories);
 
         return redirect()->route('post.index')->with('successMsg', 'Post Successfully Posted');
     }
@@ -99,8 +105,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::find($id);
-        return view('admin.post.edit',compact('post'));
+        $post = Post::with('tags', 'categories')->where('id', $id)->first();
+        $tags = Tag::all();
+        $categories = Category::all();
+        return view('admin.post.edit',compact('post', 'tags', 'categories'));
     }
 
     /**
