@@ -153,7 +153,10 @@ class PostController extends Controller
         else{
             $post -> status = false;
         }
+        
         $post -> save();
+        $post -> tags() -> sync($request -> tags);
+        $post -> categories() -> sync($request -> categories);
         return redirect()->route('post.index')->with('successMsg', 'Post Successfully Updated');
     }
 

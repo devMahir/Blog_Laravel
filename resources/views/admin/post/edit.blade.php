@@ -53,7 +53,7 @@
 
                             <div class="form-group">
                               <label>Tags</label>
-                              <select class="select2" multiple="multiple" data-placeholder="Select Tags" style="width: 100%;">
+                              <select name="tags[]"  class="select2" multiple="multiple" data-placeholder="Select Tags" style="width: 100%;">
                                 @foreach ($tags as $tag)
                                     <option value="{{ $tag->id }}"
                                       @foreach ($post->tags as $postTag)
@@ -88,7 +88,7 @@
 
                         <div class="form-group">
                           <label>Category</label>
-                          <select class="select2" multiple="multiple" data-placeholder="Select Tags" style="width: 100%;">
+                          <select name="categories[]" class="select2" multiple="multiple" data-placeholder="Select Tags" style="width: 100%;">
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}"
                                   @foreach ($post->categories as $postCategory)

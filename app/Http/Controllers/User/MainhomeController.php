@@ -4,11 +4,13 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\user\Post;
 
 class MainhomeController extends Controller
 {
     public function index()
     {
-        return view('user.blog');
+        $posts = Post::where('status', 1)->paginate(2);
+        return view('user.blog', compact('posts'));
     }
 }

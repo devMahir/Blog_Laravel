@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\TagController;
 */
 
 Route::get('/', [MainhomeController::class, 'index'])->name('mainBlog');
-Route::get('/post', [BlogController::class, 'index'])->name('post');
+Route::get('/post/{post?}', [BlogController::class, 'post'])->name('post');
 
 
 
