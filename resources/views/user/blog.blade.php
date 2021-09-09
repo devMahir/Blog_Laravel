@@ -34,13 +34,16 @@
             <hr class="my-4" />
             <!-- Divider Ends-->
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                        {{ $posts->links() }}
-                    </li>
-                </ul>
-            </nav>
+            <div class="justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <li class="page-item">
+                            {{ $posts->links() }}
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
         </div>
     </div>
 </div>
