@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\TagController;
 
 Route::get('/', [MainhomeController::class, 'index'])->name('mainBlog');
 Route::get('/post/{post?}', [BlogController::class, 'post'])->name('post');
+Route::get('/post/tag/{tag}', [MainhomeController::class, 'tag'])->name('tag');
+Route::get('/post/category/{category}', [MainhomeController::class, 'category'])->name('category');
 
 
 

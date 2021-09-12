@@ -23,7 +23,7 @@
                     <small class="float-md-end">Category : 
                         @foreach ($post -> categories as $category)
                             <strong>
-                                {{$category->name}} 
+                                <a href="{{ route('category', $category->slug) }}">{{$category->name}}</a> 
                             </strong>
                         @endforeach
                     </small>
@@ -33,7 +33,7 @@
                     <small class="float-md-start">Tag : 
                         @foreach ($post -> tags as $tag)
                             <strong>
-                                {{$tag->name}} 
+                                <a href="{{ route('tag', $tag->slug) }}">{{$tag->name}} </a>
                             </strong>
                         @endforeach
                     </small>
